@@ -7,41 +7,38 @@ public class StudentList {
         studentsArray = new Student[arrLength];
     }
 
-    public Student[] increaseList(Student[] students) {
+    public void increaseList() {
         arrLength = arrLength * 2;
         Student[] newStudents = new Student[arrLength];
-        for (int i = 0; i < students.length; i++) {
-            newStudents[i] = students[i];
+        for (int i = 0; i < studentsArray.length; i++) {
+            newStudents[i] = studentsArray[i];
+
         }
-        return newStudents;
+        studentsArray=newStudents;
     }
 
     public void addStudent(Student student) {
         if (arrLength == index) {
-            studentsArray = increaseList(studentsArray);
+            increaseList();
             studentsArray[index++] = student;
         } else {
             studentsArray[index++] = student;
         }
     }
 
-
-    public Student[] removeByName(String name, Student[] studentsArray) {
-        for (int i = 0; i < studentsArray.length - 1; i++) {
-            if (studentsArray[i] != null && studentsArray[i].name.equals(name)) {
-                studentsArray = removeByIndex(studentsArray, i);
-                i--;
+    public void removeByName(String name) {
+        for (int index = 0; index < studentsArray.length - 1; index++) {
+            if (studentsArray[index] != null && studentsArray[index].name.equals(name)) {
+             removeByIndex(index);
+                index--;
             }
         }
-
-        return studentsArray;
     }
 
-    public Student[] removeByIndex(Student[] studentsArray, int i) {
-        for (int j = i; j < studentsArray.length - 1; j++) {
-            studentsArray[j] = studentsArray[++i];
+    public void removeByIndex(int index) {
+        for (int j = index; j < studentsArray.length - 1; j++) {
+            studentsArray[j] = studentsArray[++index];
         }
-        studentsArray[i] = null;
-        return studentsArray;
+        studentsArray[index] = null;
     }
 }
